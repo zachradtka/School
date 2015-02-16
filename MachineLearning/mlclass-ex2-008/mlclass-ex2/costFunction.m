@@ -20,11 +20,24 @@ grad = zeros(size(theta));
 % Note: grad should have the same dimensions as theta
 %
 
+% Compute the predictions
+predictions = sigmoid(X * theta);
+
+% Compute cost of y = 1
+y1 = -y' * log(predictions);
+
+% Compute the cost of y = 0
+y0 = (1 .- y)' * log(1 .- predictions);
+
+% Compute the overall cost
+J = 1/(m) * (y1 - y0);
 
 
+% Compute the errors
+errors = predictions - y;
 
-
-
+% Compute the gradient descent
+grad = (1/m) * X' * errors;
 
 
 % =============================================================
