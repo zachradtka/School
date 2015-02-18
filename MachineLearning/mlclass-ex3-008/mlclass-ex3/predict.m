@@ -21,12 +21,23 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
+% Add ones to the X data matrix
+X = [ones(m, 1) X];
 
+% Compute the hidden layer
+z2 = X * Theta1';
+a2 = sigmoid(z2);
 
+% Add ones to the a2 matrix
+a2 = [ones(size(a2, 1), 1) a2];
 
+% Compute the output layer
+z3 = a2 * Theta2';
+a3 = sigmoid(z3);
 
-
-
+% Find the maximum probabilities index
+[x, xi] = max(a3, [], 2);
+p = xi;
 
 
 % =========================================================================

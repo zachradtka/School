@@ -37,10 +37,33 @@ grad = zeros(size(theta));
 %
 
 
+% Don't penalize theta0, in octave theta(1) is theta0
+theta_reg = [0; theta([2:end],:)];
+
+% Compute the predictions
+predictions = sigmoid(X * theta);
+
+% Compute cost of y = 1
+y1 = -y' * log(predictions);
+
+% Compute the cost of y = 0
+y0 = (1 .- y)' * log(1 .- predictions);
+
+% Compute the regularization for the cost
+reg_cost = lambda / (2 * m) * (theta_reg' * theta_reg);
+
+% Compute the cost with regularization
+J = 1/(m) * (y1 - y0) + reg_cost;
 
 
+% Compute the errors
+errors = predictions - y;
 
+% Compute the regularization for the gradient
+reg_grad = (lambda / m) * (theta_reg);
 
+% Compute the gradient descent
+grad = (1/m) * X' * errors + reg_grad;
 
 
 
