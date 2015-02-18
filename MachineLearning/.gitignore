@@ -3,3 +3,6 @@
 
 # Ignore login data
 ml_login_data.mat
+
+# Ignore .ds_store
+.DS_Store 
