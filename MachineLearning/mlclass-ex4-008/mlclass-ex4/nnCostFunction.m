@@ -115,9 +115,9 @@ delta_2 = d3' * a2;
 % Compute the gradient for d3
 delta_1 = d2' * a1;
 
-Theta1_grad = (1/m) * delta_1;
-Theta2_grad = (1/m) * delta_2;
-
+% Compute the gradients for theta
+Theta1_grad = (1/m) * delta_1 + (lambda / m) * [zeros(size(Theta1, 1), 1) Theta1(:, (2:end))];
+Theta2_grad = (1/m) * delta_2 + (lambda / m) * [zeros(size(Theta2, 1), 1) Theta2(:, (2:end))];
 
 
 % -------------------------------------------------------------
