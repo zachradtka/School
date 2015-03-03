@@ -62,21 +62,37 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+% Create a y matrix with K columns
+y_matrix = eye(num_labels)(y,:);
 
+% Add ones to the X data matrix
+a1 = [ones(m, 1) X];
 
+% Calculate z2
+z2 = a1 * Theta1';
 
+% Calculate a2
+a2 = sigmoid(z2);
 
+% Add 1's to a2
+a2 = [ones(size(a2, 1), 1) a2];
 
+% Calculate z3
+z3 = a2 * Theta2';
 
+% Calculate a3 == h(x)
+a3 = sigmoid(z3);
 
+% Compute cost of y = 1
+% remember to do element wise multiplication
+y1 = sum(-y_matrix .* log(a3));
 
+% Compute the cost of y = 0
+% remember to do element wise multiplication
+y0 = sum((1 .- y_matrix) .* log(1 .- a3));
 
-
-
-
-
-
-
+% Sum the results
+J = 1/(m) * sum(y1-y0);
 
 
 
