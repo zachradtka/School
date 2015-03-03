@@ -65,6 +65,10 @@ Theta2_grad = zeros(size(Theta2));
 % Create a y matrix with K columns
 y_matrix = eye(num_labels)(y,:);
 
+% Regularize the thetas by removing the bias unit column
+theta1_reg = Theta1(:, [2:end]);
+theta2_reg = Theta2(:, [2:end]);
+
 % Add ones to the X data matrix
 a1 = [ones(m, 1) X];
 
@@ -91,16 +95,28 @@ y1 = sum(-y_matrix .* log(a3));
 % remember to do element wise multiplication
 y0 = sum((1 .- y_matrix) .* log(1 .- a3));
 
-% Regularize the thetas by removing the bias unit column
-theta1_reg = Theta1(:, [2:end]);
-theta2_reg = Theta2(:, [2:end]);
-
 
 % Compute the regularization for the cost
 reg_cost = lambda / (2 * m) * (sum(sum(theta1_reg.^2)) + sum(sum(theta2_reg.^2)) );
 
 % Sum the results and add in the regularization
 J = 1/(m) * sum(y1-y0) + reg_cost;
+
+
+% Compute the delta in layer 3
+d3 = a3 - y_matrix;
+
+% Compute the delta in layer 2
+d2 =  d3 * theta2_reg .*  sigmoidGradient(z2);
+
+% Compute the gradient for d2
+delta_2 = d3' * a2;
+
+% Compute the gradient for d3
+delta_1 = d2' * a1;
+
+Theta1_grad = (1/m) * delta_1;
+Theta2_grad = (1/m) * delta_2;
 
 
 
