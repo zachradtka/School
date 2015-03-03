@@ -91,8 +91,16 @@ y1 = sum(-y_matrix .* log(a3));
 % remember to do element wise multiplication
 y0 = sum((1 .- y_matrix) .* log(1 .- a3));
 
-% Sum the results
-J = 1/(m) * sum(y1-y0);
+% Regularize the thetas by removing the bias unit column
+theta1_reg = Theta1(:, [2:end]);
+theta2_reg = Theta2(:, [2:end]);
+
+
+% Compute the regularization for the cost
+reg_cost = lambda / (2 * m) * (sum(sum(theta1_reg.^2)) + sum(sum(theta2_reg.^2)) );
+
+% Sum the results and add in the regularization
+J = 1/(m) * sum(y1-y0) + reg_cost;
 
 
 
