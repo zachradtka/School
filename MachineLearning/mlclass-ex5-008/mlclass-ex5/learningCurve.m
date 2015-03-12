@@ -54,9 +54,18 @@ error_val   = zeros(m, 1);
 % ---------------------- Sample Solution ----------------------
 
 
+% Iterate over m examples
+for i = 1:m
 
+    % Compute theta for i examples
+    [theta] = trainLinearReg(X(1:i,:), y(1:i), lambda);
 
+    % Compute J Train for i examples
+    error_train(i) = linearRegCostFunction(X(1:i,:), y(1:i), theta, 0);
 
+    % Compute the CV error with theat for i examples
+    error_val(i) = linearRegCostFunction(Xval, yval, theta, 0);
+end
 
 
 % -------------------------------------------------------------

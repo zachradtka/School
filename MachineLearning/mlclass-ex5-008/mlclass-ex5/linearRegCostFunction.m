@@ -19,14 +19,32 @@ grad = zeros(size(theta));
 %               You should set J to the cost and grad to the gradient.
 %
 
+% Don't penalize theta0, in octave theta(1) is theta0
+theta_reg = [0; theta([2:length(theta)],:)];
 
 
+% Compute the perdictions
+predictions = X * theta;
 
+% Compute the errors
+errors = (predictions - y);
 
+cost_non_reg = 1/(2*m) * errors' * errors;
 
+% Compute the regularization
+cost_reg = lambda / (2 * m) * (theta_reg' * theta_reg);
 
+% The cost is the sum of the regularized version and the non regularized version
+J = cost_non_reg + cost_reg;
 
+% Compute the non regularized gradient descent
+grad_non_reg = (1/m) * X' * errors;
 
+% Compute the regularized term for grad descent
+grad_reg = (lambda / m) * (theta_reg);
+
+% Add the regularized term to the non regularized term to produce gradient descent
+grad = grad_non_reg + grad_reg;
 
 
 
