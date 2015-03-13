@@ -17,11 +17,11 @@ sim = 0;
 %
 
 % Compute the numerator and denominator
-numerator = sum((x1 - x2).^2)
-denom = 2 * (sigma^2)
+numerator = sum((x1 - x2).^2);
+denom = 2 * (sigma^2);
 
 % Compute the entire kernel
-sim = exp(-numerator / denom)
+sim = exp(-numerator / denom);
 
 % =============================================================
     
