@@ -49,7 +49,11 @@ x = zeros(n, 1);
 %
 
 
+ordered_indicies = unique(sort(word_indices));
 
+for i = 1:length(ordered_indicies)
+    x(ordered_indicies(i)) = 1;
+end
 
 
 
