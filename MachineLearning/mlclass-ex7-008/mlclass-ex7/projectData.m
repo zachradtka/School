@@ -18,8 +18,11 @@ Z = zeros(size(X, 1), K);
 %                    projection_k = x' * U(:, k);
 %
 
+% Get the bumber of dimensions to reduce to
+U_reduce = U(:, 1:K);
 
-
+% Reduce to K dimensions
+Z = X * U_reduce;
 
 % =============================================================
 

@@ -21,6 +21,11 @@ X_rec = zeros(size(Z, 1), size(U, 1));
 %               Notice that U(j, 1:K) is a row vector.
 %               
 
+% Get the bumber of dimensions to reduce to
+U_reduce = U(:, 1:K);
+
+% Reduce to K dimensions
+X_rec = Z * U_reduce';
 
 
 % =============================================================
