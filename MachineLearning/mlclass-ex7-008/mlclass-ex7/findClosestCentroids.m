@@ -21,10 +21,27 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
+% Find the number of elements in X
+m = size(X,1);
 
+% Find the number of centroids
+K = size(centroids, 1);
 
+% Loop through all of the elements in X finding the closest centroid
+for i = 1:m
 
+    % Expand The current point in X
+    curr_example = repmat(X(i,:), K, 1);
 
+    % Calculate the distance from each centroid
+    distance = sum((curr_example - centroids).^2, 2);
+ 
+    % Find the index of the minimum distance
+    [x, xi] = min(distance);
+
+    % Set the index of the closest centroid
+    idx(i) = xi;
+end
 
 
 % =============================================================

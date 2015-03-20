@@ -28,7 +28,23 @@ centroids = zeros(K, n);
 
 
 
+centroid_size = zeros(K,1);
 
+for i = 1:m
+
+    % Get the centroid 
+    curr_centroid = idx(i);
+
+    % Sum the points of the current centroid
+    centroids(curr_centroid,:) += X(i,:);
+
+    % Increase the size of the centroid by 1
+    centroid_size(curr_centroid) += 1;
+
+end
+
+% Compute the min of all centroids
+centroids = 1./ repmat(centroid_size,1,n) .* centroids;
 
 
 
