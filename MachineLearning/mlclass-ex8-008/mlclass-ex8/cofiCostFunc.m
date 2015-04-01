@@ -41,13 +41,23 @@ Theta_grad = zeros(size(Theta));
 %
 
 
+% Calculate the estimation
+estimation = X * Theta';
 
+% Calculate the errors
+errors = (estimation - Y);
 
+% Calculate the cost
+J = 1/2 * sum(sum((errors.*R ).^ 2));
 
+% Only use the valid errors
+valid_errors = errors .* R;
 
+% Compute the gradient for X
+X_grad = valid_errors* Theta;
 
-
-
+% Compute the gradient for Theta
+Theta_grad = valid_errors' * X;
 
 
 
