@@ -21,14 +21,17 @@ sigma2 = zeros(n, 1);
 %               should contain variance of the i-th feature.
 %
 
+% Sum the columns and divide by the number of elements to produce the mean
+mu = 1/m * sum(X);
 
+% Create a matrix of the mean values
+mean_matrix = repmat(mu, m,1);
 
+% Calculate the differences and square them
+sqr_diff = (X - mean_matrix).^2;
 
-
-
-
-
-
+% Sum the squared differences to get the variance
+sigma2 = 1/m * sum(sqr_diff);
 
 % =============================================================
 
