@@ -48,21 +48,25 @@ estimation = X * Theta';
 errors = (estimation - Y);
 
 % Calculate the cost
-J = 1/2 * sum(sum((errors.*R ).^ 2));
+cost = 1/2 * sum(sum((errors.*R ).^ 2));
+
+% Compute the regularization for Theta and X
+Theta_reg = lambda/2*(sum(sum(Theta.^2)));
+X_reg = lambda/2*(sum(sum(X.^2)));
+
+regularization = Theta_reg + X_reg;
+
+% Add the regularization to the cost
+J = cost + regularization;
 
 % Only use the valid errors
 valid_errors = errors .* R;
 
 % Compute the gradient for X
-X_grad = valid_errors* Theta;
+X_grad = valid_errors* Theta + lambda * X;
 
 % Compute the gradient for Theta
-Theta_grad = valid_errors' * X;
-
-
-
-
-
+Theta_grad = valid_errors' * X + lambda * Theta;
 
 
 % =============================================================
