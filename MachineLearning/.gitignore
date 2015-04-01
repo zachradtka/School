@@ -6,3 +6,6 @@ ml_login_data.mat
 
 # Ignore .ds_store
 .DS_Store 
+
+# Ignore octave core dumps
+# octave-core
